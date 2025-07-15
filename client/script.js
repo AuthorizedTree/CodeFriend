@@ -60,6 +60,10 @@ const handleSubmit = async (e) => {
     const prompt = textarea.value.trim();
     if (!prompt) return;
 
+    // Switch to active layout
+    app.classList.remove('centered')
+    app.classList.add('active')
+
     // Add user message (User chatstripe)
     chatContainer.innerHTML += chatStripe(false, prompt);
     form.reset();
@@ -79,7 +83,7 @@ form.addEventListener('submit', handleSubmit);
 
 textarea.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {  
-        e.preventDefault(); // prevent newline
+        e.preventDefault(); // prevent default newline associated with event
         handleSubmit(e); // submit form
     }
 });

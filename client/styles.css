@@ -67,11 +67,19 @@ html, body {
   margin-right: 40px;
 }
 
+/* Chat is centered before interaction */
+#app.centered {
+  justify-content: center;
+  align-items: center;
+}
+
+/* Chat Layout after first prompt */
 #app.active {
   justify-content: flex-end;
   align-items: center;
 }
 
+/* Show chat after activation */
 #chat_container {
   display: none;
   flex: 1;
