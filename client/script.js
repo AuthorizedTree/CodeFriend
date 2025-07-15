@@ -115,6 +115,4 @@ themeToggleBtn.addEventListener('click', () => {
       ? isDark ? bot : botDark
       : isDark ? user : userDark;
   });
-
-
 });
