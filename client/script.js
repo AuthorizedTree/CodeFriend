@@ -1,4 +1,6 @@
+import bot from './assets/bot.png'
 import botDark from './assets/bot_dark.png';
+import user from './assets/user.png'
 import userDark from './assets/user_dark.png';
 
 const form = document.querySelector('form');
@@ -39,20 +41,27 @@ function generateUniqueId() {
 }
 
 function chatStripe(isAi, value, uniqueId) {
+    const isDark = document.body.classList.contains('dark');
+
+    // Check whether to use dark or light colored bot and user
+    const imageSrc = isAi
+        ? isDark ? botDark : bot
+        : isDark ? userDark : user;
+
     return `
         <div class="wrapper ${isAi ? 'ai' : ''}">
             <div class="chat">
                 <div class="profile">
                     <img 
-                      src="${isAi ? botDark : userDark}" 
+                      src="${imageSrc}" 
                       alt="${isAi ? 'bot' : 'user'}" 
-                      style="width: 30px; height: 30px;"         
+                      style="width: 30px; height: 30px;"
                     />
                 </div>
                 <div class="message" id="${uniqueId}">${value}</div>
             </div>
         </div>
-    `;
+    `
 }
 
 const handleSubmit = async (e) => {
@@ -86,4 +95,26 @@ textarea.addEventListener('keydown', (e) => {
         e.preventDefault(); // prevent default newline associated with event
         handleSubmit(e); // submit form
     }
+});
+
+const themeToggleBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const sendIcon = document.getElementById('send-icon');
+
+themeToggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+
+  themeIcon.src = isDark ? './assets/sun.png' : './assets/moon.png';
+  sendIcon.src = isDark ? './assets/send.svg' : './assets/send_dark.svg';
+
+  // For all of the bot and user icons in the chat container when toggling between dark and light mode
+  document.querySelectorAll('.profile img').forEach(img => {
+    const isBot = img.alt === 'bot';
+    img.src = isBot
+      ? isDark ? bot : botDark
+      : isDark ? user : userDark;
+  });
+
+
 });
