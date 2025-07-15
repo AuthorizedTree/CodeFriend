@@ -1,13 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>CodeFriend - AI Coding Buddy</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <div id="app" class="centered">
+      <nav id="nav">
+        <div class="nav-left">
+          <a href="http://localhost:5173/" class="code">Code</a>
+          <a href="http://localhost:5173/" class="friend">Friend</a>
+        </div>
+        <div class="nav-right">
+          <button id="theme-toggle" aria-label="Toggle Light/Dark Mode">
+            <img src="./assets/moon.png" alt="Toggle Theme" id="theme-icon"/>
+          </button>
+        </div>
+      </nav>
+      
+      <div id="chat_container"></div>
+      <form id="prompt_form">
+        <textarea name="prompt" rows="1" cols="1" placeholder="Ask CodeFriend Something..."></textarea>
+        <button type="submit"><img src="./assets/send.svg" alt="send" id="send-icon"/></button>
+      </form>
+    </div>
   </body>
 </html>
