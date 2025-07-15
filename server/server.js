@@ -2,8 +2,15 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import OpenAI from 'openai';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config();
+// These two lines are needed when using ES modules (type: "module")
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Resolve path to .env manually
+dotenv.config({ path: path.resolve(__dirname, '../.env') }); // located in root directory locally for testing purposes
 
 // Initialize OpenAI
 const openai = new OpenAI({
