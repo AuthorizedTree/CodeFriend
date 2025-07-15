@@ -45,8 +45,8 @@ function chatStripe(isAi, value, uniqueId) {
 
     // Check whether to use dark or light colored bot and user
     const imageSrc = isAi
-        ? isDark ? botDark : bot
-        : isDark ? userDark : user;
+        ? isDark ? bot : botDark
+        : isDark ? user : userDark;
 
     return `
         <div class="wrapper ${isAi ? 'ai' : ''}">
@@ -85,6 +85,33 @@ const handleSubmit = async (e) => {
     const messageDiv = document.getElementById(uniqueId);
     loader(messageDiv);
 
+    // Fetch the response from the server API and render it on the user interface
+    try {
+        const response = await fetch('http://localhost:5000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt })
+        })
+
+        clearInterval(loadInterval)
+        messageDiv.innerHTML = ""
+
+        if (response.ok) {
+            const data = await response.json()
+            const parsedData = data.bot.trim()
+            typeText(messageDiv, parsedData)
+        } else {
+            const err = await response.text()
+            messageDiv.innerHTML = "Something went wrong"
+            alert(err)
+        }
+    } catch (err) {
+        clearInterval(loadInterval)
+        messageDiv.innerHTML = "Network error"
+        console.error(err)
+    }
 }
 
 // Enter key causes prompt to be submitted
