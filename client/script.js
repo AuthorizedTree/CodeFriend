@@ -87,7 +87,7 @@ const handleSubmit = async (e) => {
 
     // Fetch the response from the server API and render it on the user interface
     try {
-        const response = await fetch('http://localhost:5000', {
+        const response = await fetch('https://codefriend-uezf.onrender.com/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
