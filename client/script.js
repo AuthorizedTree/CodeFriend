@@ -2,6 +2,10 @@ import bot from './assets/bot.png'
 import botDark from './assets/bot_dark.png';
 import user from './assets/user.png'
 import userDark from './assets/user_dark.png';
+import sun from './assets/sun.png';
+import moon from './assets/moon.png';
+import send from './assets/send.svg'; 
+import sendDark from './assets/send_dark.svg';
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
@@ -132,8 +136,8 @@ themeToggleBtn.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   const isDark = document.body.classList.contains('dark');
 
-  themeIcon.src = isDark ? './assets/sun.png' : './assets/moon.png';
-  sendIcon.src = isDark ? './assets/send.svg' : './assets/send_dark.svg';
+  themeIcon.src = isDark ? sun : moon;
+  sendIcon.src = isDark ? send : sendDark;
 
   // For all of the bot and user icons in the chat container when toggling between dark and light mode
   document.querySelectorAll('.profile img').forEach(img => {
